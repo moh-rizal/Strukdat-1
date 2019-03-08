@@ -1,0 +1,139 @@
+Fungsi konversi angka ke okta
+
+def okta(angka):
+    okta=stack()
+    hasil=""
+    while angka>0:
+        push(okta,angka%8)
+        angka//=8
+    while not(isEmpty(okta)):
+        hasil+=str(pop(okta))
+    return hasil
+
+hasil=okta(256)
+print(hasil)
+
+Fungsi konversi angka ke hexadecimal
+
+def hexadec(angka):
+    hexa=stack()
+    hasil=""
+    while angka>0:
+        push(hexa,angka%16)
+        angka//=16
+    while not(isEmpty(hexa)):
+        for i in (hexa):
+            if i>=10:
+                if i == 10:
+                    hasil+="A"
+                    pop(hexa)
+                elif i == 11:
+                    hasil+="B"
+                    pop(hexa)
+                elif i== 12:
+                    hasil+="C"
+                    pop(hexa)
+                elif i== 13:
+                    hasil+="D"
+                    pop(hexa)
+                elif i==14:
+                    hasil+="E"
+                    pop(hexa)
+                else:
+                    hasil+="F"
+                    pop(hexa)
+            else:
+                hasil+=str(pop(hexa))
+    return hasil
+
+hasil=hexadec(31)
+print(hasil)
+
+Operasi Aritmatik Infix,Prefix,Postfix
+
+    Infix = operasi aritmatika diantara 2 buah operand
+    Prefix = operasi sebelum 2 buah operand
+    Postfix = operasi sesudah 2 buah operand
+
+EX:
+
+A*B+C
+Prefix= +*ABC
+PostFix= AB*C+
+
+(A+B)*(C+D)
+Prefix= *+AB+CD
+Postfix= AB+CD+*
+
+(A+B)*C
+Prefix= *+ABC
+Postfix= AB+C*
+
+A*B-C*D
+Prefix = -*AB*CD
+POstfix= AB*CD*-
+
+Fungsi konversi Infix ke Postfix
+
+def postfix(rumus):
+    data=stack()
+    high='*/'
+    low='+-'
+    output=""
+    for i in (rumus):
+        if (i in low):
+            if isEmpty(data):
+                push(data,i)
+            else:
+                while not isEmpty(data) and (peek(data)in high):
+                    output+=pop(data)
+                push(data,i)
+        elif (i in high):
+            if isEmpty(data):
+                push(data,i)
+            else:
+                while not(isEmpty) and (peek(data) in low):
+                    output+=pop(data)
+                push(data,i)
+        elif (i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ") or (i in "0123456789"):
+            output+=i
+        elif (i=="("):
+            push(data,i)
+        elif (i ==")"):
+            while not(isEmpty(data)):
+                temp=peek(data)
+                if (temp != "("):
+                    output+=pop(data)
+                else:
+                    pop(data)
+    while not isEmpty(data):
+        output+=pop(data)
+    return output
+
+def hitung(pers):
+    s=stack()
+    hasil=0
+    cek=""
+    operator='+-*/'
+    for i in pers:
+        if i in "1234567890":
+            push(s,i)
+        elif i in operator and not(isEmpty(s)):
+            temp=0
+            temp+=int(pop(s))
+            if i=="+":
+                temp+=int(pop(s))
+            elif i=="-":
+                temp-=int(pop(s))
+            elif i=="*":
+                temp*=int(pop(s))
+            elif i=="/":
+                temp/=int(pop(s))
+            hasil+=temp
+            push(s,i)
+        elif i in operator and (peek(s) in operator):
+            cek+=pop(s)
+    return hasil
+
+hasil=postfix("2*4")
+print(hasil)
