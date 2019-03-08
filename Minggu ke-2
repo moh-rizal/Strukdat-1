@@ -10,9 +10,9 @@ Terdapat operasi dasar pada Stacks,
     * isEmpty(), untuk memeriksa apakah stacks kosong atau tidak
     * size(), informasi jumlah data yang terdapat pada stack
 
-***
 Fungsi dasar Stack
-`def stacks():
+
+def stacks():
     s=[]
     return (s)
 def push(s,data):
@@ -24,23 +24,22 @@ def pop(s):
 def peek(s):
     return(s[len(s)-1])
 def isEmpty(s):
-    return(s==[])`
+    return(s==[])
 
-***
 Fungsi untuk membalik kata
-`def reverseWord(teks):
+
+def reverseWord(teks):
     r=stack()
     hasil=''
     for i in range(len(teks)):
         push(r,teks[i])
     for i in range(len(teks)):
         hasil=hasil+pop(r)
-    return hasil`
+    return hasil
 
-
-***
 Fungsi konversi binary
-`def konversi(angka):
+
+def konversi(angka):
     biner=stack()
     hasil=""
     while angka>0:
@@ -51,4 +50,4 @@ Fungsi konversi binary
     return hasil
 
 hasil=konversi(255)
-print(hasil)`
+print(hasil)
