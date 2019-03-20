@@ -1,0 +1,286 @@
+Queues
+
+Queues menggunakan konsep FIFO (First In First Out),Queues terdiri dari :
+
+1. Queues
+2. operasi Queues
+3. Contoh Implementasi Queues
+
+def createQueue():
+    q=[]
+    return q
+#nambah data
+def enQueue(q,data):
+    q.insert(0,data)
+    return q
+#menghapus data
+def deQueue(q):
+    data=q.pop()
+    return(data)
+def isEmpty(q):
+    return (q==[])
+def size(q):
+    return (len(q))
+    
+q=createQueue()
+enQueue(q,"matematika")
+enQueue(q,"Struktur data")
+enQueue(q,'bahasa inggris')
+enQueue(q,'pemrograman web')
+print(q)
+
+akan menghasilkan output:
+['pemrograman web', 'bahasa inggris', 'Struktur data', 'matematika']
+
+Deque
+
+Deque bisa menginput/menghapus data baik dari Front maupun rear
+Operasi-operasi Deque:
+
+- createDeque ()
+- addFront(data) 
+- addRear(data)
+- removeRear()
+- removeFront()
+- isEMpty()
+- size()
+
+def createDeque():
+    d=[]
+    return d
+def addFront(d,data):
+    d.insert(0,data)
+    return d
+def addRear(d,data):
+    d.append(data)
+    return d
+def removeRear(d):
+    data=d.pop()
+    return data
+def removeFront(d):
+    data=d.pop(0)
+    return data
+def isEmpty(d):
+    return (d==[])
+def size(d):
+    return len(d)
+def cekPalindrom(string):
+    palindrom=createDeque()
+    for huruf in (string):
+        addRear(palindrom,huruf)
+    cek=True
+    while cek:
+        for i in range(size(palindrom)):
+            if palindrom[0]==palindrom[-1] and size(palindrom)>2:
+                removeRear(palindrom)
+                removeFront(palindrom)
+            elif size(palindrom)==1:
+                cek=False
+            else:
+                cek=False
+    if size(palindrom)<=1 or isEmpty(palindrom):
+        return True
+    else:
+        return False
+cek=cekPalindrom("kasurrusak")
+print(cek)
+
+
+    class, tipe data yang tidak hanya berisi data tetepi juga method
+    object. suatu variabel dengan tipe data class
+    state,property, bagian dari suatu class yang berisi nilai, dapat berupa string,integer, float
+    method. fungsi yang melekat pada class
+    constructor, fungsi yang dijalankan oleh python ketika pertama kali suatu object dibuat. method constructor ini dibuat dengan mendefinisikan fungsi_init_(dua underscore)
+    instace, suatu object yang sudah dibuat
+    override, mendefinisikan ulang fungsi-fungsi yang ada
+
+class namaClass: def__init__():#construtor def namaMethod():#method
+class BilanganKompleks:
+    def __init__(self,a,b):
+        self.re=a
+        self.im=b
+    def display(self):
+        print(self.re,"+",self.im,"i")
+    def display2(self):
+        temp=(str(self.re)+"+"+str(self.im)+"i")
+        return temp
+    def __str__(self):
+        return str(self.re)+" + "+str(self.im)+"i"
+    def addNumb(self,num1,num2):
+        self.re=num1.re+num2.re
+        self.im=num1.im+num2.im
+    def addnum2(self,num):
+        self.re=self.re+num.re
+        self.im=self.im+num.im
+    def addkompleks(self,obj):
+        a=self.re+obj.re
+        b=self.im+obj.im
+        return BilanganKompleks(a,b)
+    def __add__(self,obj):
+        a=self.re+obj.re
+        b=self.im+obj.im
+        return BilanganKompleks(a,b)
+    def __mul__(self,obj):
+        a=self.re*obj.re
+        b=self.re*obj.im+obj.re*self.im
+        c=self.im*obj.re*-1
+        a=a+c
+        return BilanganKompleks(a,b)
+    def __sub__(self,obj):
+        a=self.re-obj.re
+        b=self.im-obj.im
+        return BilanganKompleks(a,b)
+    def __floordiv__(self,obj):
+        hitung1=(self.re*(obj.re))+(self.im*(-obj.im)*-1)
+        hitung2=(self.re*(-obj.im))+(self.im*(obj.re))
+        hitung3=obj.re*(obj.re)+(obj.im*(-obj.im)*-1)+(obj.re*(-obj.im))+(obj.im*(obj.re))
+        hitung4=obj.re*(obj.re)+(obj.im*(-obj.im)*-1)+(obj.re*(-obj.im))+(obj.im*(obj.re))
+        if type(hitung1/hitung3)==float:
+            for i in range(1,100):
+                if ((hitung1%i)==0) and ((hitung3%i)==0):
+                    hitung1//=i
+                    hitung3//=i
+                    hasil1=str(hitung1)+"/"+str(hitung3)
+                else:
+                    hasil1=str(hitung1)+"/"+str(hitung3)
+                if (hitung1%hitung3==0):
+                    hasil1=hitung1//hitung3
+            if type(hitung2/hitung3)==float:
+                for j in range(1,100):
+                    if ((hitung2%j)==0) and ((hitung4%j)==0):
+                        hitung2//=j
+                        hitung4//=j
+                        hasil2=str(hitung2)+"/"+str(hitung4)
+                    else:
+                        hasil2=str(hitung2)+"/"+str(hitung3)
+                if (hitung2%hitung4==0):
+                    hasil2=hitung2//hitung4
+            else:
+                hasil2=hitung2/hitung3
+        else:
+            if type(hitung2/hitung3)==float:
+                for k in range(1,100):
+                    if ((hitung2%j)==0) and ((hitung4%j)==0):
+                        hitung2//=k
+                        hitung4//=k
+                        hasil2=str(hitung2)+"/"+str(hitung4)
+                    else:
+                        hasil2=str(hitung2)+"/"+str(hitung3)
+            else:
+                hasil2=hitung2/hitung3
+            if (hitung2%hitung3==0):
+                hasil2=hitung2//hitung4
+        return BilanganKompleks(hasil1,hasil2)
+
+def __floordiv__(self,obj):
+        a=self.re*(-obj.im)
+        b=self.re*(obj.re)
+        c=self.im*(obj.re)
+        d=self.im*(-obj.im)*-1
+        f=obj.re*(-obj.im)
+        g=obj.re*(obj.re)
+        h=obj.im*(obj.re)
+        i=obj.im*(-obj.im)*-1
+        hitung1=b+d
+        hitung2=a+c
+        hitung3=g+i+f+h
+        hitung4=g+i+f+h
+        if type(hitung1/hitung3)==float:
+            for i in range(1,100):
+                if ((hitung1%i)==0) and ((hitung3%i)==0):
+                    hitung1//=i
+                    hitung3//=i
+                    hasil1=str(hitung1)+"/"+str(hitung3)
+                else:
+                    hasil1=str(hitung1)+"/"+str(hitung3)
+            if type(hitung2/hitung3)==float:
+                for j in range(1,100):
+                    if ((hitung2%j)==0) and ((hitung4%j)==0):
+                        hitung2//=j
+                        hitung4//=j
+                        hasil2=str(hitung2)+"/"+str(hitung4)
+                    else:
+                        hasil2=str(hitung2)+"/"+str(hitung3)
+            else:
+                hasil2=hitung2/hitung3
+        else:
+            if type(hitung2/hitung3)==float:
+                hasil2=str(hitung2)+"/"+str(hitung3)
+            else:
+                hasil2=hitung2/hitung3
+        return BilanganKompleks(hasil1,hasil2)
+
+Node
+
+Data di dalam memory berada di alamat yang berbeda-beda, jika dibutuhkan agar data-data tersebut dapat terhubung satu sama lain, maka informasi tambahan yang menunjukkan alamat berikutnya sangatlah diperlukan. Dalam node yang paling penting adalah node dan pointer next.
+class Node:
+    def __init__(self,init_data):
+        self.data = init_data
+        self.next = None
+    def getData(self):
+        return self.data
+    def getNext(self):
+        return self.next
+    def setData(self,newData):
+        self.data = newdata
+    def setNext(self,new_next):
+        self.next = new_next
+a=Node(93)
+b=Node(20)
+c=Node(45)
+a.setNext(b)
+print(a.getNext())
+print(a.getNext().getData())
+a.getData()
+a.setNext(b)
+b.setNext(c)
+print(a.getNext().getData())
+print(b.getNext().getData())
+
+class LinkedList:
+    def __init__(self):
+        self.head=None
+    def isEmpty(self):
+        return self.head==None
+    def add(self,item):
+        temp= Node(item)
+        temp.setNext(self.head)
+        self.head =temp
+    def size(self):
+        current = self.head
+        count = 0
+        while current != None:
+            count+=1
+            current=current.getNext()
+
+        return count
+    def display(self):
+        current=self.head
+        while current!=None:
+            print(current.getData())
+            current=current.getNext()
+    def search(self,obj):
+        current=self.head 
+        found=False
+        while current!=None and not found:
+            if obj==current.getData():
+                found=True
+                return found
+            current=current.getNext()
+    def search2(self,obj):
+        current=self.head 
+        found=False
+        index=0
+        while current!=None and not found:
+            if obj==current.getData():
+                found=True
+                return found,"index ke-",index
+            current=current.getNext()
+            index+=1
+    def remove(self,obj):
+        current = self.head
+        previous = None
+        found=False
+        while not found:
+            previous=current
+            current=current.getNext()
